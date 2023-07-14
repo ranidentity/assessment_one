@@ -9,6 +9,7 @@ require (
 	github.com/go-playground/validator/v10 v10.14.0
 	github.com/joho/godotenv v1.5.0
 	github.com/redis/go-redis/v9 v9.0.5
+	github.com/siongui/gojianfan v0.0.0-20210926212422-2f175ac615de
 	golang.org/x/crypto v0.11.0
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.5.1

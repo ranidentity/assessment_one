@@ -16,3 +16,11 @@ func (m *Teacher) SelectOne(email string) (result Teacher, err error) {
 	err = db.First(&result).Error
 	return
 }
+
+func (m *Teacher) SelectMultiple(email []string) (result []Teacher, err error) {
+	db := DB.Model(m)
+	db.Where("Email in ?", email)
+	// db.Preload("Student")
+	err = db.Find(&result).Error
+	return
+}

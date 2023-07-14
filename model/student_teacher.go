@@ -22,6 +22,11 @@ type StudentTeacher struct {
 	Teacher   Teacher   `gorm:"foreignKey:TeacherId;references:id"`
 }
 
+type StudentTeacherResponse struct {
+	Teacher  string   `json:"teacher"`
+	Students []string `json:"students"`
+}
+
 func (m *StudentTeacher) TeacherRegisterStudent(input []StudentTeacher) error {
 	// db := DB.Model(m)
 	// tx := db.Begin()
@@ -35,4 +40,17 @@ func (m *StudentTeacher) TeacherRegisterStudent(input []StudentTeacher) error {
 		return nil
 	})
 	return err
+}
+
+func (m *StudentTeacher) List(teacher_ids []int, relative string) (list []StudentTeacher, err error) {
+	db := DB.Model(m)
+	db.Where("teacher_id in ?", teacher_ids)
+	switch relative {
+	case "student":
+		db.Preload("Student")
+	case "teacher":
+		db.Preload("Teacher")
+	}
+	err = db.First(&list).Error
+	return
 }

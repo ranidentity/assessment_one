@@ -18,3 +18,12 @@ func (m *Student) SelectOne(email string) (result Student, err error) {
 	err = db.First(&result).Error
 	return
 }
+
+func (m *Student) SelectFromRelations(ids []int) (result []Student, err error) {
+	db := DB.Model(m)
+	db.Joins("Teacher")
+	db.Where("Teacher.Id in ?", ids)
+	db.Where("Student.Status = ?", 1)
+	err = db.Find(&result).Error
+	return
+}

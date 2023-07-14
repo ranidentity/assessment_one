@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"singo/model"
 	"singo/serializer"
 )
@@ -26,21 +25,22 @@ func (service *StudentRegistrationService) Register() serializer.Response {
 		}
 	}
 	var data []model.StudentTeacher
+	var valid_emails []string
 	for _, i := range service.FormStudents {
 		student, err := service.Student.SelectOne(i)
 		if err != nil {
 			error_email = append(error_email, i)
 		} else {
+			valid_emails = append(valid_emails, i)
 			data = append(data, model.StudentTeacher{StudentId: student.Id, TeacherId: teacher.Id, Teacher: teacher, Student: student})
 		}
 	}
-	fmt.Println(data)
 	err = service.StudentTeacher.TeacherRegisterStudent(data)
 	if err != nil {
 		return serializer.ParamErr("Registration failed", err)
 	}
 
-	return serializer.BuildStudentTeacherResponse(data)
+	return serializer.BuildStudentTeacherResponse(data, service.FormTeacher, valid_emails)
 }
 
 func (service *StudentRegistrationService) valid() *serializer.Response {
