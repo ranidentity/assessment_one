@@ -25,3 +25,23 @@ func RetrieveStudentsAPI(c *gin.Context) {
 		c.JSON(200, ErrorResponse(err))
 	}
 }
+
+func UpdateStudentAPI(c *gin.Context) {
+	var service service.UpdateStudentService
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.UpdateStudent()
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}
+
+func RetrieveForNotificationAPI(c *gin.Context) {
+	var service service.SendNotificationService
+	if err := c.ShouldBind(&service); err == nil {
+		res := service.CheckNotificationTarget()
+		c.JSON(200, res)
+	} else {
+		c.JSON(200, ErrorResponse(err))
+	}
+}

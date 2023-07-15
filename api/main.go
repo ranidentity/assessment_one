@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"singo/conf"
-	"singo/model"
 	"singo/serializer"
 
 	"github.com/gin-gonic/gin"
@@ -20,14 +19,14 @@ func Ping(c *gin.Context) {
 }
 
 // CurrentUser 获取当前用户
-func CurrentUser(c *gin.Context) *model.User {
-	if user, _ := c.Get("user"); user != nil {
-		if u, ok := user.(*model.User); ok {
-			return u
-		}
-	}
-	return nil
-}
+// func CurrentUser(c *gin.Context) *model.User {
+// 	if user, _ := c.Get("user"); user != nil {
+// 		if u, ok := user.(*model.User); ok {
+// 			return u
+// 		}
+// 	}
+// 	return nil
+// }
 
 // ErrorResponse 返回错误消息
 func ErrorResponse(err error) serializer.Response {

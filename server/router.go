@@ -20,6 +20,8 @@ func NewRouter() *gin.Engine {
 	{
 		v1.POST("ping", api.Ping)
 		v1.POST("register", api.RegisterAPI)
+		v1.POST("suspend", api.UpdateStudentAPI)
+		v1.POST("retrievefornotifications", api.RetrieveForNotificationAPI)
 
 		v1.GET("/commonstudets", api.RetrieveStudentsAPI)
 		// // 用户登录

@@ -1,9 +1,15 @@
 package serializer
 
-import "singo/model"
+type TeacherRegisterStudentResponse struct {
+	TeacherEmail string   `json:"teacher"`
+	StudentEmail []string `json:"students"`
+}
 
-func BuildStudentTeacherResponse(input []model.StudentTeacher, teacher_email string, students []string) Response {
+func BuildStudentTeacherResponse(teacher string, students []string) Response {
 	return Response{
-		Data: input,
+		Data: TeacherRegisterStudentResponse{
+			TeacherEmail: teacher,
+			StudentEmail: students,
+		},
 	}
 }
