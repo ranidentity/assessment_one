@@ -24,20 +24,7 @@ func NewRouter() *gin.Engine {
 		v1.POST("retrievefornotifications", api.RetrieveForNotificationAPI)
 
 		v1.GET("/commonstudets", api.RetrieveStudentsAPI)
-		// // 用户登录
-		// v1.POST("user/register", api.UserRegister)
 
-		// // 用户登录
-		// v1.POST("user/login", api.UserLogin)
-
-		// // 需要登录保护的
-		// auth := v1.Group("")
-		// auth.Use(middleware.AuthRequired())
-		// {
-		// 	// User Routing
-		// 	auth.GET("user/me", api.UserMe)
-		// 	auth.DELETE("user/logout", api.UserLogout)
-		// }
 	}
 	return r
 }
